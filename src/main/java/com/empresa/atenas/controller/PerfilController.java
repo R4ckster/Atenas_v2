@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,21 @@ public class PerfilController {
 	private PerfilModel PesquisarPerfilPorID(@PathVariable("id") int id)   
 	{  
 		return perfilService.PesquisarPerfilPorID(id);  
+	}  
+	
+	
+	@RequestMapping(value="/perfil", method=RequestMethod.POST)
+	private int savePerfil(@RequestBody PerfilModel perfil)   
+	{  
+		perfilService.SalvarPerfil(perfil);  
+		return perfil.getId();  
+	}  
+	
+	@RequestMapping(value="/perfil", method=RequestMethod.PUT)
+	private int updatePerfil(@RequestBody PerfilModel perfil)   
+	{  
+		perfilService.AtualizarPerfil(perfil);  
+		return perfil.getId();  
 	}  
 	
 }
